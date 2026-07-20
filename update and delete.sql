@@ -1,0 +1,133 @@
+-- SINGLE LINE COMMENT
+/*
+MULTI
+LINE
+COMMENT
+*/
+-- TO EXECUTE THE QUERY CTRL+ENTER
+-- SELECT THE QUERY AND HIT EXECUTE OPTION
+
+-- CREATING A DATABASE IN MYSQL:
+CREATE DATABASE DEMO;
+SHOW DATABASES;
+USE DEMO;
+/*
+ CREATE TABLE TABLE_NAME (
+ COLUMN_1_NAME DATATYPE CONSTRAINT,
+ COLUMN_2_NAME DATATYPE CONSTRAINT
+ );
+ */
+ 
+ CREATE TABLE STUDENTS
+ (
+ STUDENT_ID INT,
+ STUDENT_NAME VARCHAR(50),
+ EMAIL VARCHAR(50),
+ SCORES DECIMAL(5,2),
+ JOINING_DATE DATE
+ );
+ SHOW TABLES;
+ CREATE DATABASE BANKINGDB;
+ USE BANKINGDB;
+ CREATE TABLE Customers
+(
+    CustomerID INT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    Phone VARCHAR(15)
+);
+
+USE DEMO;
+
+CREATE TABLE Accounts (
+    AccountID INT,
+    AccountType VARCHAR(20),
+    Balance DECIMAL(10,2)
+);
+CREATE TABLE Transactions (
+    TransactionID INT,
+    TransactionDate DATE,
+    Amount DECIMAL(10,2),
+    TransactionType VARCHAR(20)
+);
+CREATE TABLE Branches (
+    BranchID INT,
+    BranchName VARCHAR(100),
+    BranchAddress VARCHAR(200),
+    BranchPhone VARCHAR(15)
+);
+CREATE TABLE AccountBranches ( 
+		AssignmentDate DATE
+);
+
+CREATE TABLE Loans (
+    LoanID INT,
+    LoanAmount DECIMAL(10,2),
+    InterestRate DECIMAL(5,2),
+    StartDate DATE,
+    EndDate DATE
+);
+SHOW DATABASES;
+
+SELECT * FROM Loans;
+DESCRIBE AccountBranches;
+
+ALTER TABLE Customers
+ADD DateOfBirth DATE;
+
+ALTER TABLE Customers
+MODIFY Phone VARCHAR(20);
+
+ALTER TABLE Accounts
+ADD CONSTRAINT chk_MinBalance
+CHECK (Balance >= 1000);
+
+desc students;
+ 
+DROP table AccountBranches;
+
+describe AccountBranches;
+
+ALTER TABLE Customers
+ADD PRIMARY KEY (CustomerID);
+
+ALTER TABLE Accounts
+ADD CustomerID INT;
+
+ALTER TABLE Accounts
+ADD CONSTRAINT FK_Accounts_Customers
+FOREIGN KEY (CustomerID)
+REFERENCES Customers(CustomerID);
+
+ALTER TABLE Customers
+MODIFY FirstName VARCHAR(50) NOT NULL;
+
+ALTER TABLE Customers
+ADD CONSTRAINT uq_Email UNIQUE (Email);
+
+INSERT INTO Customers
+(CustomerID, FirstName, LastName, Email, Phone, DateOfBirth)
+VALUES
+(101,'Rahul','Sharma','rahul@gmail.com','9876543210','1998-04-15');
+
+INSERT INTO Customers
+(CustomerID, FirstName, LastName, Email, Phone, DateOfBirth)
+VALUES
+(102,'mani','maran','mm@gmail.com','9876545210','1978-04-15');
+
+INSERT INTO Accounts
+(AccountID, CustomerID, AccountType, Balance)
+VALUES
+(201,101,'Savings',25000);
+
+select * from customers;
+select * from accounts;
+
+set sql_safe_update=0;
+update customers
+set phone = "6789056432"
+where customerID = 101;
+
+delete from customers
+where CustomerID=102
